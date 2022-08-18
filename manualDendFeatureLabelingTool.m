@@ -2,8 +2,11 @@ close all
 clear all
 clc
 
+currentDir = pwd;
+addpath(genpath(currentDir));
+
 desiredPixelSize    = 0.035;        % Do not change this value! 
-fullFileList        = uipickfiles('FilterSpec','/Users/Argunsah/Documents/MATLAB/Data/');
+fullFileList        = uipickfiles;
 
 labName             = 'turtleLab';  % Change this to your Lab Name
 

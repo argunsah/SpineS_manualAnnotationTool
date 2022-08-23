@@ -1,11 +1,11 @@
-function [X,Y] = ginputzoom;
+function [X,Y] = ginputzoom(xlen,ylen)
 
 button = 0;
 zlvl   = 1;
 xl     = get(gca,'xlim');
-xlen   = 1600;
+% xlen   = 1600;
 yl     = get(gca,'ylim');
-ylen   = 1600;
+% ylen   = 1600;
 
 X = [];
 Y = [];
@@ -13,7 +13,7 @@ Y = [];
 while button~=3
     % Get the mouse position on the axes (needed for binary image editing) and button number
     [x,y,button] = myginput(1,'arrow');
-    if x<xlen & y<ylen
+    if x<xlen && y<ylen
         % Determine if it is a zoom-in or zoom-out
         if button==122
             zlvl = zlvl*2;
@@ -25,7 +25,11 @@ while button~=3
         elseif button==1
                X = [X x];
                Y = [Y y];
-               hold on, plot(x,y,'.y');
+               hold on, plot(x,y,'.r');
+        elseif button==100
+               hold on, plot(X(end),Y(end),'xb');
+               X(end) = [];
+               Y(end) = [];
         end
         % Change the axis limits to where the mouse click has occurred
         % and make sure that the display window is within the image dimensions
@@ -43,5 +47,5 @@ end
 
 hA = gca;
 resetplotview(hA,'InitializeCurrentView');
-set(hA,'xlim',[1 1600]);
-set(hA,'ylim',[1 1600]);
+set(hA,'xlim',[1 xlen]);
+set(hA,'ylim',[1 ylen]);

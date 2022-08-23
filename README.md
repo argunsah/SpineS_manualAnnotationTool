@@ -1,6 +1,9 @@
 # SpineS_manualAnnotationTool
 Manual Dendritic Feature and Tracing Tool
 
+Load Data
+After aadjusting the contrast, close the window using X, do not use Adjust button.
+
 For Tracing:
 
 Pick a couple point on the dendritic branch of interest using left mouse click. (More points longer waiting time)

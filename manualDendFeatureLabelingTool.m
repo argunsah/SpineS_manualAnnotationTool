@@ -73,14 +73,14 @@ for fileNo = 1:size(fullFileList,2)
             clear y;
             clear z;
            
-            [x,y] = ginputzoom(size(tempMIP,1),size(tempMIP,2));
+            [x,y] = ginputzoom(size(tempMIP,2),size(tempMIP,1));
             
             if length(x)>1
            
                 hA = gca;
                 resetplotview(hA,'InitializeCurrentView');
-                set(hA,'xlim',[1 size(tempMIP,1)]);
-                set(hA,'ylim',[1 size(tempMIP,2)]);
+                set(hA,'xlim',[1 size(tempMIP,2)]);
+                set(hA,'ylim',[1 size(tempMIP,1)]);
     
                 for k = 1:length(x)
                     z(k) = tempZ(round(y(k)),round(x(k)));
@@ -100,7 +100,7 @@ for fileNo = 1:size(fullFileList,2)
                     meanSL         = [meanSL ;meanOfTwoLines(ShortestLine,ShortestLine2)];
                 end
 
-                subTemp = sub2ind(size(tempMIP),meanSL(:,2),meanSL(:,1));
+                subTemp = sub2ind(size(tempMIP),meanSL(:,1),meanSL(:,2));
                 allZ    = improfile(tempZ,meanSL(:,2),meanSL(:,1),size(meanSL,1));
                 allZ    = sgolayfilt(allZ,3,2*round(size(meanSL,1)/6)-1);
                 hh      = scatter(meanSL(:,2),meanSL(:,1),1,'.r');
@@ -195,14 +195,14 @@ for fileNo = 1:size(fullFileList,2)
                 clear Y;
             
                 title(sprintf('Annotate %s',labelList{iSel2}));
-                [Y,X]   = ginputzoom(size(tempMIP,1),size(tempMIP,2)); 
+                [Y,X]   = ginputzoom(size(tempMIP,2),size(tempMIP,1)); 
                 x_peaks = [x_peaks round(X)];
                 y_peaks = [y_peaks round(Y)];
                
                 hA = gca;
                 resetplotview(hA,'InitializeCurrentView');
-                set(hA,'xlim',[1 size(tempMIP,1)]);
-                set(hA,'ylim',[1 size(tempMIP,2)]);
+                set(hA,'xlim',[1 size(tempMIP,2)]);
+                set(hA,'ylim',[1 size(tempMIP,1)]);
     
                 trainingLabels = [trainingLabels iSel2*ones(1,length(X))];
             end

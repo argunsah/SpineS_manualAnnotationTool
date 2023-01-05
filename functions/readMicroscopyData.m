@@ -19,11 +19,15 @@ function [dataInfo, multiCube] = readMicroscopyData(fullFileList)
                     out      = ReadImage6D(dataName, true, 1); %XYCZT
                     dataInfo = out{2};
                     data     = out{1};
-                case '.tif'
+                case {'.tif','.tiff'}
                     % tagNames = tiffObj.getTagNames()
                     tiffObj  = Tiff(dataName,'r');
                     data     = FastTiff(dataName);
-                    dataInfo.XResolution = tiffObj.getTag('XResolution');
+                    try
+                        dataInfo.XResolution = tiffObj.getTag('XResolution');
+                    catch
+                        dataInfo.XResolution = nan;
+                    end
             end
         else
             filelist            = dir(fullfile(dataName,'*.tif*'));
